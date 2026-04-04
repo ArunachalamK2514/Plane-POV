@@ -1,0 +1,10 @@
+export const BASE_RADIUS = 400
+export const RADIUS_PER_PHOTO = 60
+export const PHOTO_MIN_Y = 40
+export const PHOTO_MAX_Y = 220
+export const CLOUD_BASE_COUNT = 18
+export const CLOUD_PER_PHOTO = 0.4
+export const PHOTO_MIN_SEPARATION = 30
+export const FLIGHT_SPEED = 0.18
+export const FLIGHT_DAMPING = 0.88
+export const MAX_PHOTOS = 50
