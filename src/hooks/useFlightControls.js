@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import usePhotoStore from '../store/usePhotoStore'
 
 export default function useFlightControls() {
   const keysRef = useRef({
@@ -16,6 +17,16 @@ export default function useFlightControls() {
       if (e.code === 'KeyD') k.d = true
       if (e.code === 'Space') { e.preventDefault(); k.space = true }
       if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') k.shift = true
+      if (e.code === 'ArrowUp') {
+        e.preventDefault()
+        const { flightSpeedMultiplier, setFlightSpeedMultiplier } = usePhotoStore.getState()
+        setFlightSpeedMultiplier(flightSpeedMultiplier + 0.5)
+      }
+      if (e.code === 'ArrowDown') {
+        e.preventDefault()
+        const { flightSpeedMultiplier, setFlightSpeedMultiplier } = usePhotoStore.getState()
+        setFlightSpeedMultiplier(flightSpeedMultiplier - 0.5)
+      }
     }
     const onKeyUp = (e) => {
       const k = keysRef.current

@@ -16,6 +16,7 @@ export default function FlightRig() {
   const { keysRef, velocityRef } = useFlightControls()
   const setPointerLocked = usePhotoStore(s => s.setPointerLocked)
   const photoCount = usePhotoStore(s => s.photos.length)
+  const flightSpeedMultiplier = usePhotoStore(s => s.flightSpeedMultiplier)
   const controlsRef = useRef()
   const tmpDir = useRef(new THREE.Vector3())
 
@@ -29,9 +30,9 @@ export default function FlightRig() {
     const dt = Math.min(delta, 0.05) * 60 // normalize to 60fps
 
     // Desired input
-    const inputX = ((keys.d ? 1 : 0) - (keys.a ? 1 : 0)) * FLIGHT_SPEED
-    const inputY = ((keys.space ? 1 : 0) - (keys.shift ? 1 : 0)) * FLIGHT_SPEED
-    const inputZ = ((keys.s ? 1 : 0) - (keys.w ? 1 : 0)) * FLIGHT_SPEED - AUTO_FORWARD
+    const inputX = ((keys.d ? 1 : 0) - (keys.a ? 1 : 0)) * FLIGHT_SPEED * flightSpeedMultiplier
+    const inputY = ((keys.space ? 1 : 0) - (keys.shift ? 1 : 0)) * FLIGHT_SPEED * flightSpeedMultiplier
+    const inputZ = ((keys.s ? 1 : 0) - (keys.w ? 1 : 0)) * FLIGHT_SPEED * flightSpeedMultiplier - AUTO_FORWARD * flightSpeedMultiplier
 
     // Apply damping then add input
     vel.x = vel.x * FLIGHT_DAMPING + inputX * (1 - FLIGHT_DAMPING)
@@ -40,9 +41,9 @@ export default function FlightRig() {
 
     // Clamp speed
     const speed = Math.sqrt(vel.x ** 2 + vel.z ** 2)
-    if (speed > MAX_SPEED) {
-      vel.x = (vel.x / speed) * MAX_SPEED
-      vel.z = (vel.z / speed) * MAX_SPEED
+    if (speed > MAX_SPEED * flightSpeedMultiplier) {
+      vel.x = (vel.x / speed) * MAX_SPEED * flightSpeedMultiplier
+      vel.z = (vel.z / speed) * MAX_SPEED * flightSpeedMultiplier
     }
 
     // Convert local XZ movement to world space using camera orientation
