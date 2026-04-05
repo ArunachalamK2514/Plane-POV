@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { useState } from 'react'
 import usePhotoStore from '../../store/usePhotoStore'
 import { clearAllPhotosFromDB } from '../../utils/db'
