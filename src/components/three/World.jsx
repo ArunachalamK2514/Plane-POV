@@ -16,9 +16,10 @@ export default function World() {
       gl={{ antialias: true, alpha: false }}
       frameloop="always"
     >
-      <fog attach="fog" args={['#b8d4f0', 200, 3000]} />
+      <color attach="background" args={['#5b9bd5']} />
+      <fog attach="fog" args={['#5b9bd5', 200, 3000]} />
       <ambientLight intensity={0.6} />
-      <directionalLight position={[100, 200, 50]} intensity={1.2} />
+      <directionalLight position={[100, 200, 50]} intensity={0.65} />
 
       <SkyDome />
       <CloudField />
@@ -26,7 +27,7 @@ export default function World() {
       <FlightRig />
 
       <EffectComposer>
-        <Bloom luminanceThreshold={0.9} intensity={0.3} mipmapBlur />
+        <Bloom luminanceThreshold={1.2} intensity={0.3} mipmapBlur />
         <ChromaticAberration offset={CHROMATIC_OFFSET} radialModulation={false} modulationOffset={0} />
       </EffectComposer>
     </Canvas>

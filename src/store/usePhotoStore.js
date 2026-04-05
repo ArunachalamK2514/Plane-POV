@@ -32,8 +32,20 @@ const usePhotoStore = create((set, get) => ({
   isPointerLocked: false,
   isUploadOpen: false,
   isAdding: false,
+  storageLoaded: false,
+  flightSpeedMultiplier: 1,
 
   hydrateFromStorage: (photos) => set({ photos }),
+  setStorageLoaded: (val) => set({ storageLoaded: val }),
+  setFlightSpeedMultiplier: (val) => set({ flightSpeedMultiplier: Math.max(0.5, Math.min(5.0, val)) }),
+  isResetConfirmOpen: false,
+  setResetConfirmOpen: (val) => set({ isResetConfirmOpen: val }),
+
+  clearAllPhotos: () => set({
+    photos: [],
+    selectedPhotoId: null,
+    isUploadOpen: true,
+  }),
 
   addPhoto: async (file) => {
     const state = get()

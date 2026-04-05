@@ -11,6 +11,10 @@ export default function PhotoModal() {
   const photo = photos.find(p => p.id === selectedPhotoId) || null
 
   useEffect(() => {
+    if (selectedPhotoId) document.exitPointerLock()
+  }, [selectedPhotoId])
+
+  useEffect(() => {
     const onKey = (e) => { if (e.code === 'Escape') selectPhoto(null) }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)

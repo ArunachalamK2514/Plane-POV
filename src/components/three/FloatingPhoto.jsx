@@ -38,7 +38,7 @@ function PhotoMesh({ photo }) {
       <mesh
         ref={meshRef}
         position={[0, 0, 0.01]}
-        onClick={(e) => { e.stopPropagation(); selectPhoto(photo.id) }}
+        onClick={(e) => { e.stopPropagation(); document.exitPointerLock(); selectPhoto(photo.id) }}
         onPointerOver={() => { document.body.style.cursor = 'pointer' }}
         onPointerOut={() => { document.body.style.cursor = 'default' }}
       >
